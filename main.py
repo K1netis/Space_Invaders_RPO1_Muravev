@@ -18,7 +18,7 @@ def start_game():
     while flag:
         
         controls.events(screen, hero, bullets)
-        screen.blit(pygame.image.load(os.path.join('image/enemy.png')), (-100,-100))
+        screen.blit(pygame.image.load(os.path.join('image/background.png')), (-100,-100))
         # pygame.display.flip()
         hero.moving_hero(screen)
         controls.update(screen, hero, bullets, enemys)
