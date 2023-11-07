@@ -1,6 +1,7 @@
 import pygame
 import sys
 from bullet import Bullet
+from enemy import Enemy
 
 
 def events(screen, hero, bullets):
@@ -20,12 +21,12 @@ def events(screen, hero, bullets):
                     hero.move_right = False
                 if event.key == pygame.K_a:
                     hero.move_left = False
-def update(screen, hero, bullets, enemy):
+def update(screen, hero, bullets, enemys):
     screen.fill(0)
     for bullet in bullets.sprites():
         bullet.draw_bullet()
-    enemy.output_enemy()
     hero.output_hero()
+    enemys.output_enemy()
     pygame.display.flip()
 
 def moving_bullets(screen, bullets):
@@ -33,3 +34,14 @@ def moving_bullets(screen, bullets):
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
+
+def create_army(screen, enemys):
+    enemy = Enemy(screen)
+    enemy_wight = enemy.rect.width
+
+    num_enemy_x = int(1100 / enemy_wight)
+    for i in range(num_enemy_x):
+        enemy = Enemy(screen)
+        enemy.x = enemy_wight + enemy_wight * i
+        enemy.rect.x = enemy.x
+        enemys.add(enemy)

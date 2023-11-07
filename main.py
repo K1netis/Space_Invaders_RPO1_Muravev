@@ -2,6 +2,7 @@ import pygame, controls
 from hero import Hero
 from enemy import Enemy
 from pygame.sprite import Group
+import os
 
 def start_game():
     '''основная функция для описания игры'''
@@ -11,16 +12,16 @@ def start_game():
 
     #объекты классов
     hero = Hero(screen)
-    enemy = Enemy(screen)
     bullets = Group()
-    
+    enemys = Group()
     flag = True
     while flag:
         
         controls.events(screen, hero, bullets)
-
+        screen.blit(pygame.image.load(os.path.join('image/enemy.png')), (-100,-100))
         # pygame.display.flip()
         hero.moving_hero(screen)
-        controls.update(screen, hero, bullets, enemy)
+        controls.update(screen, hero, bullets, enemys)
         controls.moving_bullets(screen, bullets)
+        controls.create_army(screen)
 start_game()
