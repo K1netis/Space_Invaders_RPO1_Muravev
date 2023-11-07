@@ -1,37 +1,26 @@
-import pygame
-import sys
+import pygame, controls
 from hero import Hero
+from enemy import Enemy
+from pygame.sprite import Group
 
 def start_game():
-    '''Основная функция для описания игры'''
+    '''основная функция для описания игры'''
     pygame.init()
-    screen = pygame.display.set_mode((1200, 900))
+    screen = pygame.display.set_mode((1200, 1000))
     pygame.display.set_caption("Самая лучшая игра")
 
+    #объекты классов
     hero = Hero(screen)
-
+    enemy = Enemy(screen)
+    bullets = Group()
+    
     flag = True
-    move_left = False
-    move_right = False
     while flag:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_d:
-                    move_right = True
-                if event.key == pygame.K_a:
-                    move_left = True
-            if event.type == pygame.KEYUP:
-                move_right = False
-                move_left = False
         
-        if move_right == True and hero.rect.right < 1200:
-            hero.rect.centerx += 1
-        if move_left == True and hero.rect.left > 0:
-            hero.rect.centerx -= 1
-        pygame.display.flip()
-        screen.fill(0)
-        hero.output_hero()
+        controls.events(screen, hero, bullets)
 
+        # pygame.display.flip()
+        hero.moving_hero(screen)
+        controls.update(screen, hero, bullets, enemy)
+        controls.moving_bullets(screen, bullets)
 start_game()
