@@ -4,9 +4,9 @@ class Bullet(pygame.sprite.Sprite):
     def __init__(self, screen, hero):
         super(Bullet, self).__init__()
         self.screen = screen
-        self.rect = pygame.Rect(0, 0, 4, 12)
+        self.rect = pygame.Rect(0, 0, 10, 12)
         self.color = 77, 109, 243
-        self.speed = 10.5
+        self.speed = 3
         self.rect.centerx = hero.rect.centerx
         self.rect.top = hero.rect.top
         self.y = float(self.rect.y)
