@@ -7,11 +7,12 @@ def start_game():
     '''основная функция для описания игры'''
     pygame.init()
     screen = pygame.display.set_mode((1200 , 1000))
-    pygame.display.set_caption("Самая лучшая игра")
     background = pygame.image.load("image/background.png")
+    pygame.display.set_caption("Самая лучшая игра")
 
     #объекты классов
     hero = Hero(screen)
+    
     bullets = Group()
     enemys = Group()
     stats = Stats()
@@ -19,11 +20,9 @@ def start_game():
     
     flag = True
     while flag:
-        screen.blit(background, (0, 0))
         controls.events(screen, hero, bullets)
         hero.moving_hero(screen)
-
-        controls.update(screen, hero, enemys, bullets)
+        controls.update(screen, hero, enemys, bullets, background)
         controls.update_bullets(screen, bullets, enemys)
         controls.update_enemys(screen, stats, enemys, bullets, hero)
         

@@ -22,8 +22,9 @@ def events(screen, hero, bullets):
             if event.key == pygame.K_a:
                 hero.move_left = False
 
-def update(screen, hero, enemys, bullets):
+def update(screen, hero, enemys, bullets, background):
     screen.fill(0)
+    screen.blit(background, (0, 0))
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     hero.output_hero()
